@@ -5,7 +5,7 @@ let fileServer = new nStatic.Server("./public", { indexFile: "client.html" });
 const songs = require("./songs.json");
 const ini = require("ini");
 const config = ini.parse(fs.readFileSync("./config.ini", "utf-8"));
-
+const DATANAMES = config.DATANAMES.split(", ");
 console.log("NODE VERSION: " + process.versions.node);
 console.log(config);
 
@@ -56,7 +56,6 @@ function refreshDataTxt() {
     config.SEPARATOR +
     actualSong.Genre +
     config.SEPARATOR +
-    "RefreshedAt: " +
     date;
 
   fs.writeFile("./public/data.txt", content, (err) => {
@@ -68,9 +67,26 @@ function refreshDataTxt() {
   });
 }
 
-const intervalTime = 15000;
-config.DATAGENERATION && setInterval(refreshDataTxt, intervalTime);
+const intervalTimeForTXT = 15000;
+config.DATAGENERATION && setInterval(refreshDataTxt, intervalTimeForTXT);
 //END - Data.txt generáló rész vége
+
+//Generate data.json
+async function generateDataJson() {
+  const content = await await getDataJson();
+  const contentstring = JSON.stringify(content);
+  fs.writeFile("./public/data.json", contentstring, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log("Data.json refreshed...");
+  });
+}
+
+const intervalTimeForJSON = 5000;
+setInterval(generateDataJson, intervalTimeForJSON);
+//EBD data.json generate
 
 io.on("connection", (socket) => {
   console.log("Socketserver started...");
@@ -85,23 +101,23 @@ fs.watchFile(
     interval: 1000
   },
   async function (data) {
-    const dataTXT = await fs.readFileSync("./public/data.txt", "utf8");
-    const messageObject = textToObj(dataTXT);
+    const messageObject = await getDataJson();
     io.emit("file", { message: messageObject });
     console.log("File sended...");
   }
 );
 
 function textToObj(text) {
-  const arr = text.split(config.SEPARATOR);
-  const obj = {
-    Album: arr[0],
-    Picture: arr[1],
-    Year: arr[2],
-    Artist: arr[3],
-    Title: arr[4],
-    Genre: arr[5],
-    RefreshedAt: arr[6]
-  };
-  return obj;
+  const data = text.split(config.SEPARATOR);
+  const structure = {};
+  DATANAMES.map((dataname, index) => {
+    structure[dataname] = data[index];
+  });
+
+  return structure;
+}
+
+async function getDataJson() {
+  const dataTXT = await fs.readFileSync("./public/data.txt", "utf8");
+  return textToObj(dataTXT);
 }
