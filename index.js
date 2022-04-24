@@ -3,13 +3,19 @@ const fs = require("fs");
 let nStatic = require("node-static");
 let fileServer = new nStatic.Server("./public", { indexFile: "client.html" });
 const songs = require("./songs.json");
+const ini = require("ini");
+const config = ini.parse(fs.readFileSync("./config.ini", "utf-8"));
 
 console.log("NODE VERSION: " + process.versions.node);
+console.log(config);
 
 const httpServer = http
   .createServer(function (req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "https://cdpn.io");
-    res.setHeader("Access-Control-Allow-Origin", "https://example.com");
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://cdpn.io",
+      "https://example.com"
+    );
 
     req
       .addListener("end", function () {
@@ -29,7 +35,7 @@ const options = {
 };
 const io = require("socket.io")(httpServer, options);
 
-//Ez a rész szimulálja a data.txt generálást
+//Ez a rész szimulálja a data.txt generálást. Ha más szoftver végzi ezt, erre a kódrészre nincs szükség. A consfig.ini-ben kikapcsolható. DATAGENERATION=false
 function refreshDataTxt() {
   const date = new Date().toLocaleTimeString("hu-HU", {
     timeZone: "Europe/Budapest"
@@ -39,17 +45,18 @@ function refreshDataTxt() {
 
   const content =
     actualSong.Album +
-    ", " +
+    config.SEPARATOR +
     actualSong.Picture +
-    ", " +
+    config.SEPARATOR +
     actualSong.Year +
-    ", " +
+    config.SEPARATOR +
     actualSong.Artist +
-    ", " +
+    config.SEPARATOR +
     actualSong.Title +
-    ", " +
+    config.SEPARATOR +
     actualSong.Genre +
-    ", RefreshedAt: " +
+    config.SEPARATOR +
+    "RefreshedAt: " +
     date;
 
   fs.writeFile("./public/data.txt", content, (err) => {
@@ -62,7 +69,7 @@ function refreshDataTxt() {
 }
 
 const intervalTime = 15000;
-setInterval(refreshDataTxt, intervalTime);
+config.DATAGENERATION && setInterval(refreshDataTxt, intervalTime);
 //END - Data.txt generáló rész vége
 
 io.on("connection", (socket) => {
@@ -86,7 +93,7 @@ fs.watchFile(
 );
 
 function textToObj(text) {
-  const arr = text.split(", ");
+  const arr = text.split(config.SEPARATOR);
   const obj = {
     Album: arr[0],
     Picture: arr[1],

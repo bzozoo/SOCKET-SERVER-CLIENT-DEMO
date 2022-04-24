@@ -17,9 +17,10 @@ socket.on("file", ({ message }) => {
 });
 
 async function fetchData() {
-  console.log("Initial fetch...");
   const res = await fetch("./data.txt");
   const data = await res.text();
+  console.log("Initial fetch...");
+  console.log(data);
   return data;
 }
 
@@ -32,10 +33,10 @@ init();
 
 function Template({ Album, Picture, Year, Artist, Title, Genre, RefreshedAt }) {
   return `
-  <div style="margin:0.8rem;font-family:sans-serif;background:#EBA669;width:max-content;padding:1rem;">
+  <div style="max-width:500px;margin:0.8rem;font-family:sans-serif;background:#EBA669;width:max-content;padding:1rem;">
   <h4>BZOZOO RETRO RADIO</h4>
   
-  <div style="display:flex;flex-direction:column;background:antiquewhite;width:max-content;">
+  <div style="display:flex;flex-direction:column;background:antiquewhite;width:max-content;max-width:inherit;">
     <div style="display:flex">
       <div style="display:flex;flex-direction:column;margin-right:0.8rem;">
         <div style="padding:0.7rem"><b>Album </b> ${Album}</div>
