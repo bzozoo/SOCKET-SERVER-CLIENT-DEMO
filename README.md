@@ -21,3 +21,4 @@ https://codepen.io/bzozoo/pen/rNpgGOW (Client for https://socket-server-client-d
 
 ##### Git Sources
 https://github.com/bzozoo/SOCKET-SERVER-CLIENT-DEMO
+https://gitlab.com/bzozoo/SOCKET-SERVER-CLIENT-DEMO
