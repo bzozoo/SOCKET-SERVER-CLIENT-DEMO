@@ -1,0 +1,82 @@
+[
+  {
+    "Album": "Not That Kind",
+    "Picture": "https://upload.wikimedia.org/wikipedia/en/f/f4/Anastacia_-_Not_That_Kind_%28album%29.png",
+    "Year": "1999",
+    "Artist": "Anastacia",
+    "Title": "I'm Outta Love",
+    "Genre": "dance-pop"
+  },
+  {
+    "Album": "Out of Time",
+    "Picture": "https://upload.wikimedia.org/wikipedia/en/7/72/R.E.M._-_Losing_My_Religion.jpg",
+    "Year": "1990",
+    "Artist": "REM",
+    "Title": "Losing My Religion",
+    "Genre": "Alternative rock"
+  },
+  {
+    "Album": "True Blue",
+    "Picture": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Madonna_-_La_Isla_Bonita_logo.png",
+    "Year": "1987",
+    "Artist": "Madonna",
+    "Title": "La Isla Bonita",
+    "Genre": "Dance Pop"
+  },
+  {
+    "Album": "Utálom az egész XX. századot",
+    "Picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Beatrice_együttes_tagjai-_hátul_Donászy_Tibor%2C_Miklóska_Lajos%2C_középen_Lugosi_László%2C_Gidófalvy_Attila%2C_elől_Nagy_Feró._Fortepan_89126.jpg/1280px-Beatrice_együttes_tagjai-_hátul_Donászy_Tibor%2C_Miklóska_Lajos%2C_középen_Lugosi_László%2C_Gidófalvy_Attila%2C_elől_Nagy_Feró._Fortepan_89126.jpg",
+    "Year": "1991",
+    "Artist": "Beatrice",
+    "Title": "8 óra munka",
+    "Genre": "Rock"
+  },
+  {
+    "Album": "The Hush",
+    "Picture": "https://upload.wikimedia.org/wikipedia/en/f/f9/Summer_Son.jpg",
+    "Year": "1999",
+    "Artist": "Texas",
+    "Title": "Summer Son",
+    "Genre": "Pop Rock"
+  },
+  {
+    "Album": "Sleeping in My Car",
+    "Picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Roxette-Roxette_at_Bospop_festival_The_Netherlands_2011.jpg/1280px-Roxette-Roxette_at_Bospop_festival_The_Netherlands_2011.jpg",
+    "Year": "1994",
+    "Artist": "Roxette",
+    "Title": "Sleeping in My Car",
+    "Genre": "Pop Rock Punk"
+  },
+  {
+    "Album": "Grease: The Original Soundtrack from the Motion Picture",
+    "Picture": "https://upload.wikimedia.org/wikipedia/en/d/df/Summer_Nights_by_John_Travolta%2C_Olivia_Newton-John%2C_and_cast_Australian_vinyl_Side-A.png",
+    "Year": "1978",
+    "Artist": "Summer Nights",
+    "Title": "Summer Nights",
+    "Genre": "Musical Pop"
+  },
+  {
+    "Album": "Exotic II",
+    "Picture": "https://i.ytimg.com/vi/4vttqNal4Ms/hqdefault.jpg",
+    "Year": "1990",
+    "Artist": "Exotic",
+    "Title": "Trabant",
+    "Genre": "Pop Rock New wave"
+  },
+  {
+    "Album": "Space Invaders",
+    "Picture": "https://upload.wikimedia.org/wikipedia/en/d/d4/Another_Night_Real_McCoy_1993_German_edition.jpg",
+    "Year": "1994",
+    "Artist": "Real McCoy",
+    "Title": "Another Night",
+    "Genre": "Eurodance"
+  },
+  {
+    "Album": "A szabadság vándora",
+    "Picture": "https://i.ytimg.com/vi/9LdoDDOFKu4/hqdefault.jpg",
+    "Year": "1989",
+    "Artist": "Demjén",
+    "Title": "A szabadság vándorai",
+    "Genre": "Rock Pop"
+  }
+]
