@@ -9,6 +9,12 @@ Run this example:
 - `npm run dev` or `yarn dev`
 - `npm start`
 
-#### Client demo on Codepen
+#### DEMOS
 
-https://codepen.io/bzozoo/pen/YzYBZvB?editors=1001
+###### CLIENT ON SERVERHOST
+https://eke71h.sse.codesandbox.io/client.html
+https://socket-server-client-demo.zoltnbata.repl.co/client.html
+
+###### CLENT ON OTHER SERVER
+https://codepen.io/bzozoo/pen/YzYBZvB?editors=1001 (Client for https://eke71h.sse.codesandbox.io)
+https://codepen.io/bzozoo/pen/rNpgGOW (Client for https://socket-server-client-demo.zoltnbata.repl.co)
