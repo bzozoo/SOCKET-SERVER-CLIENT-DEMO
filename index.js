@@ -1,25 +1,27 @@
-let http = require("http");
+const http = require("http");
 const fs = require("fs");
-let nStatic = require("node-static");
-let fileServer = new nStatic.Server("./public", { indexFile: "client.html" });
+const finalhandler = require("finalhandler");
+const serveStatic = require("serve-static");
+const serve = serveStatic("./public", { index: ["client.html"] });
 const songs = require("./songs.json");
 const ini = require("ini");
 const config = ini.parse(fs.readFileSync("./config.ini", "utf-8"));
 const DATANAMES = config.DATANAMES.split(", ");
+const allowedServers = config.ALLOWEDHOSTSONSERVER.split(", ");
 console.log("NODE VERSION: " + process.versions.node);
 console.log(config);
 
 const httpServer = http
   .createServer(function (req, res) {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://cdpn.io",
-      "https://example.com"
-    );
+    const origin = req.headers.origin;
+    if (allowedServers.includes(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+    }
 
     req
       .addListener("end", function () {
-        fileServer.serve(req, res);
+        serve(req, res, finalhandler(req, res));
+        //fileServer.serve(req, res);
       })
       .resume();
   })
@@ -27,7 +29,7 @@ const httpServer = http
 
 const options = {
   cors: {
-    origin: "https://cdpn.io",
+    origin: allowedServers,
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true
