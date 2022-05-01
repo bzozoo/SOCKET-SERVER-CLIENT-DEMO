@@ -2570,6 +2570,7 @@
 //# sourceMappingURL=socket.io.min.js.map
 
 function getPlugin(element, server) {
+  console.log("Plugin element :" + element);
   const socket = io(server);
 
   socket.on("connect", (message) => {
@@ -2583,20 +2584,27 @@ function getPlugin(element, server) {
 
   socket.on("file", ({ message }) => {
     console.log(message);
-    rootElement.innerHTML = Template(message);
+    document.querySelector(`#${element}`).innerHTML = Template(message);
   });
 
   async function fetchData() {
     const res = await fetch(server + "/data.json");
+    console.log("Response status : " + res.status);
     const data = await res.json();
-    console.log("Initial fetch...");
-    console.log(data);
+    console.log("Initial fetch done!");
     return data;
   }
 
   async function init() {
-    const data = await fetchData();
-    document.querySelector(`#${element}`).innerHTML = Template(data);
+    console.log("Init...");
+    try {
+      const data = await fetchData();
+      console.log(data);
+      document.querySelector(`#${element}`).innerHTML = Template(data);
+    } catch (err) {
+      document.querySelector(`#${element}`).innerHTML =
+        "Hiba a betöltéskor... " + err;
+    }
   }
 
   init();
@@ -2633,4 +2641,6 @@ function getPlugin(element, server) {
     <br />
     `;
   }
+
+  console.log("Plugin loaded...");
 }
