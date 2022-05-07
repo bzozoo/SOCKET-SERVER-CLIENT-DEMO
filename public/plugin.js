@@ -2571,6 +2571,8 @@
 
 function getPlugin(element, server) {
   console.log("Plugin element :" + element);
+  document.head.innerHTML += `<link rel="stylesheet" href="${server}/style.css" type="text/css"/>`;
+
   const socket = io(server);
 
   socket.on("connect", (message) => {
@@ -2582,64 +2584,131 @@ function getPlugin(element, server) {
     console.log(message);
   });
 
-  socket.on("file", ({ message }) => {
+  socket.on("initialData", ({ message }) => {
+    console.log("Initial SOCKET...");
     console.log(message);
     document.querySelector(`#${element}`).innerHTML = Template(message);
+    doAnimations();
   });
 
-  async function fetchData() {
-    const res = await fetch(server + "/data.json");
-    console.log("Response status : " + res.status);
-    const data = await res.json();
-    console.log("Initial fetch done!");
-    return data;
-  }
+  socket.on("file", ({ message }) => {
+    document.querySelector(`#${element}`).innerHTML =
+      "<img src='https://i.imgur.com/AX03zYX.gif' />";
+    console.log(message);
+    document.querySelector(`#${element}`).innerHTML = Template(message);
+    doAnimations();
+  });
 
-  async function init() {
-    console.log("Init...");
-    try {
-      const data = await fetchData();
-      console.log(data);
-      document.querySelector(`#${element}`).innerHTML = Template(data);
-    } catch (err) {
-      document.querySelector(`#${element}`).innerHTML =
-        "Hiba a betöltéskor... " + err;
-    }
-  }
-
-  init();
-
-  function Template({
-    Album,
-    Picture,
-    Year,
-    Artist,
-    Title,
-    Genre,
-    RefreshedAt
-  }) {
+  function Template({ Album, Image, Year, Artist, Title, Genre, RefreshedAt }) {
     return `
-    <div style="max-width:500px;margin:0.8rem;font-family:sans-serif;background:#EBA669;width:max-content;padding:1rem;box-shadow: 5px 5px 17px #888888;">
-    <h4>BZOZOO RETRO RADIO</h4>
-    
-    <div style="display:flex;flex-direction:column;background:antiquewhite;width:max-content;max-width:inherit;">
-      <div style="display:flex">
-        <div style="display:flex;flex-direction:column;margin-right:0.8rem;">
-          <div style="padding:0.7rem"><b>Album </b> ${Album}</div>
-          <div style="padding:0.7rem"><b>Year </b> ${Year}</div>
-          <div style="padding:0.7rem"><b>Artist </b> ${Artist}</div>
-          <div style="padding:0.7rem"><b>Title </b> ${Title}</div>
-          <div style="padding:0.7rem"><b>Genre </b> ${Genre}</div>
+    <div class="container">
+      <div id="containerheader" class="flexsimple">
+        <div class="simplemarginright largerfont">BZOZOO RETRO RADIO</div>
+        <div class="largerfont flexgrowone texttoright" id="time"></div>
+      </div>
+      <div id="content" class="containerinside flexcolumn">
+        <div id="contentbody" class="flexsimple  flexcolumnreverse">
+          <div id="datas" class="flexcolumn simplemarginright">
+            <div class="simplepadding responsivefont shadow">
+              <marquee>
+                <span id="animatedArtist">${Artist}</span>
+              </marquee>
+            </div>
+            <div id="animatedTitle" class="simplepadding responsivefont shadow">
+              ${Title}
+            </div>
+            <div class="simplepadding" >
+              <b>${Year}</b> © ${Album}
+            </div>
+            <div class="simplepadding">
+              ${Genre}
+            </div>
+          </div>
+          <div id="imagebox" class="flexsimple simplepadding">
+            <img class="image" src="${Image}" />
+          </div>
         </div>
-        <div style="display:flex;padding:0.5rem;">
-          <img src="${Picture}" width="200px" height="200px" />
+        <div id="contentfooter" class="simplepadding">
+          <b>Refreshed At </b> ${RefreshedAt}
         </div>
       </div>
-      <div style="padding:0.7rem"><b>Refreshed At </b> ${RefreshedAt}</div>
-    </div>
     </div>
     <br />
     `;
+  }
+
+  function OraTemplate() {
+    const date = new Date();
+    const localsting = date.toLocaleTimeString();
+    return `
+    <span>${localsting}</span>
+  `;
+  }
+
+  setInterval(() => {
+    try {
+      const timeElement = document.querySelector("#time");
+      timeElement.innerHTML = OraTemplate();
+    } catch (e) {
+      console.warn("Time DIV does not extist still");
+    }
+  }, 100);
+
+  function animate({ element, color, speed, edgeLeft, edgeRight }) {
+    console.log("Animation start on elemment...");
+    console.log(document.querySelector(element));
+    const stringForAnimation = document.querySelector(element).innerText;
+    document.querySelector(element).innerHTML = "";
+
+    function TemplateFor(character) {
+      return ` <div class="inline" style="display:inline-block;margin:-0.1rem;">${character}</div>`;
+    }
+
+    stringForAnimation.split("").map((character) => {
+      document.querySelector(element).innerHTML += TemplateFor(character);
+    });
+    const elementSpans = [...document.querySelectorAll(element + " .inline")];
+
+    function loop(i, orientation) {
+      setTimeout(() => {
+        elementSpans.map((elementSpan) => {
+          elementSpan.style.color = "";
+        });
+        try {
+          elementSpans[i].style.color = color;
+        } catch (e) {}
+
+        orientation =
+          elementSpans.length + edgeRight <= i
+            ? "B"
+            : i <= edgeLeft
+            ? "F"
+            : orientation;
+        const newI =
+          i < elementSpans.length + edgeRight && orientation === "F"
+            ? i + 1
+            : i - 1;
+        loop(newI, orientation);
+      }, speed);
+    }
+    loop(0, "F");
+  }
+
+  function doAnimations() {
+    animate({
+      element: "#animatedArtist",
+      color: "red",
+      speed: 300,
+      edgeLeft: -10,
+      edgeRight: 3
+    });
+    animate({
+      element: "#animatedTitle",
+      color: "lightblue",
+      speed: 500,
+      edgeLeft: -10,
+      edgeRight: 3
+    });
   }
 
   console.log("Plugin loaded...");

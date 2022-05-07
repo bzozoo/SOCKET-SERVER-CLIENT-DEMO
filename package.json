@@ -1,5 +1,5 @@
 {
-  "name": "file-refresher-socket-server-v2",
+  "name": "file-refresher-socket-server",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -16,5 +16,5 @@
     "@types/node": "^17.0.25"
   },
   "keywords": [],
-  "description": "v2"
+  "description": "v4"
 }
