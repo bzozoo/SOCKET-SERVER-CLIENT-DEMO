@@ -2,21 +2,27 @@
 
 ## SET CONFIG.INI
 
-### DATAGENERATION :
+#### DATAGENERATION :
 
 true or false -> You can enable / disable data.txt generation
 
-### SEPARATOR
+#### SERVERPORT
+Server will use this port to run
 
-You can set the data.txt separator character (example : , or ; or other)
+#### SEPARATOR
 
-### DATANAMES
+You can set separator character for the datasource file datas (Example : , or ; or other)
 
-You can set keys of your data.txt
+#### DATASOURCEFILE
+You can set datasource file path (Example: "./public/NowPaying.txt")
 
-### ALLOWEDHOSTSONSERVER
+#### DATANAMES
 
-You can set what client can access your server resources
+You can set keys of your datasource file
+
+#### ALLOWEDHOSTSONSERVER
+
+You can set what client (hosts) can access your server resources
 
 ## INSTALLATION
 
