@@ -42,6 +42,11 @@ Go to script folder...
 https://eke71h.sse.codesandbox.io/client.html
 https://socket-server-client-demo.zoltnbata.repl.co/client.html
 
+###### SOCKET ONLY SERVER
+(Without clientside demonstation)
+https://codesandbox.io/s/file-refresher-socket-server-simple-socket-without-static-jkn7i9
+https://jkn7i9.sse.codesandbox.io/ (demo)
+
 ###### CLENTs ON OTHER SERVER
 
 - https://codepen.io/bzozoo/pen/YzYBZvB?editors=1001 (Client for https://eke71h.sse.codesandbox.io)
