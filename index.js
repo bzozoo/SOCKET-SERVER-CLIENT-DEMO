@@ -7,11 +7,13 @@ const songs = require("./songs.json");
 const ini = require("ini");
 const config = ini.parse(fs.readFileSync("./config.ini", "utf-8"));
 const datasourceFile = config.DATASOURCEFILE;
+const port = config.SERVERPORT;
 const DATANAMES = config.DATANAMES.split(", ");
 const allowedServers = config.ALLOWEDHOSTSONSERVER.split(", ");
 console.log("NODE VERSION: " + process.versions.node);
 console.log(config);
 
+//Initialize server
 const httpServer = http
   .createServer(function (req, res) {
     const origin = req.headers.origin;
@@ -26,7 +28,8 @@ const httpServer = http
       })
       .resume();
   })
-  .listen(8080);
+  .listen(port);
+//Initialize server END
 
 //Ez a rész szimulálja a Datasource file generálást. Ha más szoftver végzi ezt, erre a kódrészre nincs szükség. A consfig.ini-ben kikapcsolható. DATAGENERATION=false
 function refreshDataTxt() {
