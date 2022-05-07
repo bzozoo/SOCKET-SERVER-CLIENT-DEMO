@@ -13,8 +13,18 @@
     "start": "node index.js"
   },
   "devDependencies": {
-    "@types/node": "^17.0.25"
+    "@types/node": "^17.0.25",
+    "node": "^16.14.2"
   },
   "keywords": [],
-  "description": "v4"
+  "description": "v4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bzozoo/SOCKET-SERVER-CLIENT-DEMO.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/bzozoo/SOCKET-SERVER-CLIENT-DEMO/issues"
+  },
+  "homepage": "https://github.com/bzozoo/SOCKET-SERVER-CLIENT-DEMO#readme"
 }
