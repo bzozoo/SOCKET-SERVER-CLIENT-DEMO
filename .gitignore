@@ -1,1 +1,6 @@
 node_modules
+<<<<<<< HEAD
+=======
+public/*.txt
+public/*.json
+>>>>>>> origin/main
