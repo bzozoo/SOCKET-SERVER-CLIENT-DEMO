@@ -1,3 +1,3 @@
 node_modules
-public/*.txt
-public/*.json
+public/**.txt
+public/**.json
