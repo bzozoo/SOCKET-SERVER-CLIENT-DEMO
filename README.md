@@ -7,7 +7,6 @@
 true or false -> You can enable / disable data.txt generation
 
 #### SERVERPORT
-
 Server will use this port to run
 
 #### SEPARATOR
@@ -15,7 +14,6 @@ Server will use this port to run
 You can set separator character for the datasource file datas (Example : , or ; or other)
 
 #### DATASOURCEFILE
-
 You can set datasource file path (Example: "./public/NowPaying.txt")
 
 #### DATANAMES
@@ -45,7 +43,6 @@ https://eke71h.sse.codesandbox.io/client.html
 https://socket-server-client-demo.zoltnbata.repl.co/client.html
 
 ###### SOCKET ONLY SERVER
-
 (Without clientside demonstation)
 https://codesandbox.io/s/file-refresher-socket-server-simple-socket-without-static-jkn7i9
 https://jkn7i9.sse.codesandbox.io/ (demo)
